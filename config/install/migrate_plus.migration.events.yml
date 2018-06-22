@@ -1,0 +1,18 @@
+id: events
+label: events
+migration_group: aarome
+source:
+  plugin: events
+  key: aarome
+destination: 
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: events
+  uid:
+    plugin: default_value
+    default_value: 8
+  title: title  
+  field_events_legacy_id: nid
+migration_dependencies: {}

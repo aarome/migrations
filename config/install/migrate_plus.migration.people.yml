@@ -1,0 +1,18 @@
+id: people
+label: people
+migration_group: directory
+source:
+  plugin: people
+  key: directory
+destination: 
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: people
+  uid:
+    plugin: default_value
+    default_value: 8
+  title: title  
+  field_people_legacy_id: nid
+migration_dependencies: {}
