@@ -1,16 +1,16 @@
 langcode: en
 status: true
 dependencies: {}
-id: event_types
+id: event_locations
 class: null
 field_plugin_method: null
 migration_tags: csv
 migration_group: academy
-label: 'Migrating event types from CSV file'
+label: 'Migrating event locations from CSV file'
 
 source:
   plugin: csv
-  path: 'public://migrations/event_types.csv'
+  path: 'public://migrations/event_locations.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
@@ -18,10 +18,15 @@ source:
     - tid
 
 process:
-  name: term_name
+  type:
+    plugin: default_value
+    default_value: places
+  uid:
+    plugin: default_value
+    default_value: 3
+  title: term_name
  
 destination: 
-  plugin: entity:taxonomy_term
-  default_bundle: event_types
+  plugin: entity:node
 
 migration_dependencies: null
