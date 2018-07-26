@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies: {}
+id: publications
+class: null
+field_plugin_method: null
+migration_tags: csv
+migration_group: academy
+label: 'Migrating publications from CSV file'
+
+source:
+  plugin: csv
+  path: 'public://migrations/publications.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_row_count: 1
+  keys:
+    - tid
+
+process:
+  name: term_name
+ 
+destination: 
+  plugin: entity:taxonomy_term
+  default_bundle: publications
+
+migration_dependencies: null
