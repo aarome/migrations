@@ -36,6 +36,10 @@ process:
   changed: updated_date
   field_events_legacy_id: nid
   title: title
+  'body/format':
+    plugin: default_value
+    default_value: basic_html
+  'body/value': body
   field_events_event_series:
     source: event_series
     plugin: entity_lookup
