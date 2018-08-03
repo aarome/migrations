@@ -11,7 +11,7 @@ label: 'Migrating news features from CSV file'
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/news_features.csv'
+  path: 'public://migrations/news_features_join.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
