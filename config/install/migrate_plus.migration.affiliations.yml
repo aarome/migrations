@@ -5,7 +5,7 @@ id: affiliations
 class: null
 field_plugin_method: null
 migration_tags: csv
-migration_group: academy
+migration_group: directory
 label: 'Migrating affiliations from CSV file'
 
 source:
@@ -48,6 +48,6 @@ process:
  
 destination:
  plugin: 'entity_reference_revisions:paragraph'
- default_bundle: affiliations
+ default_bundle: affiliation
 
 migration_dependencies: null

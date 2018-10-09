@@ -2,8 +2,8 @@ langcode: en
 status: true
 id: people
 migration_tags: csv
-migration_group: academy
-label: 'Migrating events from CSV file'
+migration_group: directory
+label: 'Migrating people from CSV file'
 
 source:
   plugin: csv
@@ -41,10 +41,11 @@ process:
     -
       plugin: extract
       index:
-        - '1' 
+        - '1'
 destination: 
   plugin: entity:node
 
 migration_dependencies:
   required:
     - affiliations
+    
