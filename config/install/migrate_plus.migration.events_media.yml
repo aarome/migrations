@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies: {  }
+id: event_media
+migration_tags: null
+label: 'Event media'
+
+source:
+  plugin: csv
+  path: 'public://migrations/events.csv'
+  header_row_count: 1
+  keys:
+    - fid
+
+process:
+  mid: fid
+  bundle:
+    plugin: default_value
+    default_value: events
+
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: "und"
+
+  uid:
+    plugin: default_value
+    default_value: 1
+
+  # Image field see media_entity.bundle.image.yml.
+  field_media_image/target_id: fid
+  field_media_image/alt: medianame
+  field_media_image/title: medianame
+  name: medianame
+
+destination:
+  plugin: entity:media
+  move: true
