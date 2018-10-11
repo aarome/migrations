@@ -1,0 +1,45 @@
+langcode: en
+status: true
+dependencies: {}
+id: press_release_files
+class: null
+field_plugin_method: null
+migration_tags: csv
+migration_group: academy
+label: 'Migrating press releases from CSV file'
+
+source:
+  type:
+    plugin: default_value
+    default_value: press_releases
+  plugin: csv
+  track_changes: true
+  path: 'public://migrations/press_releases.csv'
+  header_row_count: 1
+  keys:
+    - nid
+
+process:
+  filename:
+    -
+      plugin: get
+      source: filename
+    -
+      plugin: skip_on_empty
+      method: row
+  uri:
+    plugin: file_copy
+    source:
+      - filepath
+      - uri
+  uid:
+    plugin: default_value
+    default_value: 1
+
+destination: 
+  plugin: entity:media
+  source_path_property: filepath
+  urlencode: true
+  destination_path_propety: uri
+
+migration_dependencies: null

@@ -53,11 +53,5 @@ destination:
   plugin: entity:node
 
 migration_dependencies:
-<<<<<<< HEAD
-  required:
-    - affiliations
-    
-=======
   optional:
     - affiliations
->>>>>>> fellows

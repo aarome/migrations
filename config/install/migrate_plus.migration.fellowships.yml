@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies: {}
+id: fellowships
+class: null
+field_plugin_method: null
+migration_tags: csv
+migration_group: academy
+label: 'Migrating fellowships from CSV file'
+
+source:
+  plugin: csv
+  path: 'public://migrations/fellowships.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_row_count: 1
+  keys:
+    - tid
+
+process:
+  name: term_name
+ 
+destination: 
+  plugin: entity:taxonomy_term
+  default_bundle: fellowship_names
+
+migration_dependencies: null

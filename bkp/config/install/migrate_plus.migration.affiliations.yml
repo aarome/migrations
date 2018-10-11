@@ -5,11 +5,7 @@ id: affiliations
 class: null
 field_plugin_method: null
 migration_tags: csv
-<<<<<<< HEAD
-migration_group: directory
-=======
 migration_group: fellows
->>>>>>> fellows
 label: 'Migrating affiliations from CSV file'
 
 source:
