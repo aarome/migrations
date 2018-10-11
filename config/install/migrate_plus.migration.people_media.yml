@@ -1,14 +1,13 @@
 langcode: en
 status: true
 dependencies: {  }
-id: event_media
+id: people_media
 migration_tags: null
-label: 'Event media'
+label: 'People media'
 
 source:
   plugin: csv
-  track_changes: true
-  path: 'public://migrations/events.csv'
+  path: 'public://migrations/people_fellows.csv'
   header_row_count: 1
   keys:
     - fid
@@ -17,7 +16,7 @@ process:
   mid: fid
   bundle:
     plugin: default_value
-    default_value: events
+    default_value: people
 
   langcode:
     plugin: default_value

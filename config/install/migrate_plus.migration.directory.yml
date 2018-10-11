@@ -1,0 +1,46 @@
+langcode: en
+status: true
+id: directory
+migration_tags: csv
+migration_group: directory
+label: 'Migrating directory records from CSV file'
+
+source:
+  plugin: csv
+  track_changes: true
+  path: 'public://migrations/directory_test.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_row_count: 1
+  keys:
+    - nid
+
+process:
+  type:
+    plugin: default_value
+    default_value: people
+  uid:
+    plugin: default_value
+    default_value: 193
+  field_people_legacy_id: nid
+  field_people_name/given: fname
+  field_people_name/family: lname
+  field_people_name/family: lname
+  field_people_affiliations:
+    -
+      plugin: explode
+      source: pg
+      delimiter: ","
+    -
+      plugin: migration
+      migration: directory_affiliations_test
+      no_stub: true
+    -
+      plugin: iterator
+      process:
+        target_id: '0'
+        target_revision_id: '1'
+destination: 
+  plugin: entity:node
+
+migration_dependencies: {}

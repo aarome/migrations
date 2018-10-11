@@ -1,16 +1,17 @@
 langcode: en
 status: true
 dependencies: {  }
-id: event_images
+id: people_images
 migration_tags: null
-label: 'Event images'
+label: 'People images'
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/events.csv'
+  path: 'public://migrations/people_fellows.csv'
   header_row_count: 1
   keys:
     - fid
+
 process:
   uid:
     plugin: default_value
