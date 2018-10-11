@@ -7,10 +7,7 @@ label: 'Event media'
 
 source:
   plugin: csv
-<<<<<<< HEAD
-=======
   track_changes: true
->>>>>>> fellows
   path: 'public://migrations/events.csv'
   header_row_count: 1
   keys:
@@ -25,11 +22,7 @@ process:
   langcode:
     plugin: default_value
     source: language
-<<<<<<< HEAD
-    default_value: "und"
-=======
     default_value: "en"
->>>>>>> fellows
 
   uid:
     plugin: default_value
@@ -37,15 +30,9 @@ process:
 
   # Image field see media_entity.bundle.image.yml.
   field_media_image/target_id: fid
-<<<<<<< HEAD
-  field_media_image/alt: medianame
-  field_media_image/title: medianame
-  name: medianame
-=======
   field_media_image/alt: title
   field_media_image/title: title
   name: title
->>>>>>> fellows
 
 destination:
   plugin: entity:media

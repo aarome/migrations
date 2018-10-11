@@ -4,6 +4,7 @@ dependencies: {  }
 id: people_images
 migration_tags: null
 label: 'People images'
+
 source:
   plugin: csv
   track_changes: true
@@ -16,17 +17,23 @@ process:
   uid:
     plugin: default_value
     default_value: 1
+  
   fid: fid
-  filename: title
+  filename: filename
+  
   uri:
+    # copy file from filepath to uri
     plugin: file_copy
     source:
       - filepath
       - uri
+
 destination:
   plugin: 'entity:file'
   source_path_property: filepath
   destination_path_property: uri
   move: true
+
 template: null
+
 migration_dependencies: {  }
