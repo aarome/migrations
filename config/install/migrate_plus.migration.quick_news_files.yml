@@ -1,14 +1,14 @@
 langcode: en
 status: true
 dependencies: {  }
-id: press_release_files
+id: quick_news_images
 migration_tags: null
-label: 'Press release files'
+label: 'Quick News images'
 
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/press_releases.csv'
+  path: 'public://migrations/quick_news.csv'
   header_row_count: 1
   keys:
     - fid
@@ -22,6 +22,7 @@ process:
   filename: filename
   
   uri:
+    # copy file from filepath to uri
     plugin: file_copy
     source:
       - filepath
