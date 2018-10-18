@@ -1,0 +1,38 @@
+langcode: en
+status: true
+dependencies: {  }
+id: press_files
+migration_tags: null
+label: 'Press files'
+
+source:
+  plugin: csv
+  track_changes: true
+  path: 'public://migrations/press_clippings.csv'
+  header_row_count: 1
+  keys:
+    - fid
+
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  
+  fid: fid
+  filename: filename
+  
+  uri:
+    plugin: file_copy
+    source:
+      - filepath
+      - uri
+
+destination:
+  plugin: 'entity:file'
+  source_path_property: filepath
+  destination_path_property: uri
+  move: true
+
+template: null
+
+migration_dependencies: {  }

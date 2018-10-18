@@ -48,5 +48,6 @@ process:
 
 destination: 
   plugin: entity:node
+  urlencode: true
 
 migration_dependencies: null

@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies: {  }
+id: press_release_media
+migration_tags: null
+label: 'Press releases'
+
+source:
+  plugin: csv
+  track_changes: true
+  path: 'public://migrations/press_releases.csv'
+  header_row_count: 1
+  keys:
+    - fid
+
+process:
+  mid: fid
+  bundle:
+    plugin: default_value
+    default_value: press_releases
+
+  langcode:
+    plugin: default_value
+    source: language
+    default_value: "en"
+
+  uid:
+    plugin: default_value
+    default_value: 1
+
+  # Image field see media_entity.bundle.image.yml.
+  field_media_file/target_id: fid
+  field_media_file/description: media_name
+  field_media_file/display:
+    plugin: default_value
+    default_value: 1
+  name: media_name
+
+destination:
+  plugin: entity:media
+  move: true
