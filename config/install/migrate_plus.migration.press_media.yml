@@ -30,11 +30,16 @@ process:
 
   # Image field see media_entity.bundle.image.yml.
   field_media_file/target_id: fid
-  field_media_file/description: media_name
+  field_media_file/description: title
   field_media_file/display:
     plugin: default_value
     default_value: 1
-  name: media_name
+  name:
+    plugin: concat
+    source:
+      - publication
+      - title
+    delimiter: ', '
 
 destination:
   plugin: entity:media

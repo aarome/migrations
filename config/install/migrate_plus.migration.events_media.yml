@@ -1,9 +1,9 @@
 langcode: en
 status: true
 dependencies: {  }
-id: event_media
+id: events_media
 migration_tags: null
-label: 'Event media'
+label: 'Events media'
 
 source:
   plugin: csv
@@ -22,13 +22,13 @@ process:
   langcode:
     plugin: default_value
     source: language
-    default_value: "en"
+    default_value: 'en'
 
   uid:
     plugin: default_value
     default_value: 1
 
-  # Image field see media_entity.bundle.image.yml.
+  # Image field: see media_entity.bundle.image.yml
   field_media_image/target_id: fid
   field_media_image/alt: title
   field_media_image/title: title

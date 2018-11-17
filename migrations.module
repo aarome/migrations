@@ -5,11 +5,21 @@
  * Contains migrations.module.
  */
 
-/** 
- * Implements hook_uninstall(). 
- */ 
-function migrations_uninstall() { 
-  db_query("DELETE FROM {config} WHERE name LIKE 'migrate_plus.migration.%'"); 
-  db_query("DELETE FROM {config} WHERE name LIKE 'migrate_plus.migration_group.%'"); 
-  drupal_flush_all_caches(); 
+/**
+ * Implements hook_uninstall().
+ *
+ * Removes stale migration configs during uninstall.
+ */
+function migrations_uninstall() {
+  $query = db_select('config', 'c')
+    ->fields('c', array('name'))
+    ->condition('name', db_like('migrate_plus.') . '%', 'LIKE')
+    ->execute();
+
+  $config_names = $query->fetchAll();
+
+  // Delete each config using configFactory.
+  foreach ($config_names as $config_name) {
+    \Drupal::configFactory()->getEditable($config_name->name)->delete();
+  }
 }

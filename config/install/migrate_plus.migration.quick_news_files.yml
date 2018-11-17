@@ -19,7 +19,12 @@ process:
     default_value: 1
   
   fid: fid
-  filename: filename
+  filename: 
+    plugin: concat
+    source:
+        - publication_date
+        - filename
+    delimiter: '-'
   
   uri:
     # copy file from filepath to uri

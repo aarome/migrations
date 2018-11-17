@@ -19,7 +19,13 @@ process:
     default_value: 1
   
   fid: fid
-  filename: filename
+  filename: 
+    plugin: concat
+    source:
+        - publication_date
+        - publication
+        - filename
+    delimiter: '-'
   
   uri:
     plugin: file_copy
@@ -34,5 +40,4 @@ destination:
   move: true
 
 template: null
-
 migration_dependencies: {  }

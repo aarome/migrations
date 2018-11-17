@@ -40,7 +40,8 @@ process:
     plugin: default_value
     default_value: basic_html
   'body/value': body
-  field_news_feature_date/value:
+  field_news_features_summary: summary
+  field_news_features_date/value:
     plugin: format_date
     source: post_date
     from_format: 'Y-m-d'

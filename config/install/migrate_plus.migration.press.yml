@@ -40,12 +40,8 @@ process:
   field_press_date/value:
     plugin: format_date
     source: publication_date
-    from_format: 'Y-m-d'
+    from_format: 'Ymd'
     to_format: 'Y-m-d'
 
 destination: 
   plugin: entity:node
-
-#migration_dependencies:
-#  optional:
-#    - press_release_files
