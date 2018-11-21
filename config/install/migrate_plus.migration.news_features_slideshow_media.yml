@@ -1,13 +1,16 @@
 langcode: en
 status: true
-dependencies: {  }
-id: people_media
-migration_tags: null
-label: 'Migrating News Feature slideshow media from CSV file'
+dependencies: {}
+id: news_features_slideshow_media
+migration_tags: csv
+label: 'Migrating News Feature slideshow files from CSV file'
 
 source:
   plugin: csv
+  track_changes: true
   path: 'public://migrations/news_feature_slideshow_files.csv'
+  delimiter: ','
+  enclosure: '"'
   header_row_count: 1
   keys:
     - fid
@@ -17,7 +20,7 @@ process:
   
   bundle:
     plugin: default_value
-    default_value: people
+    default_value: news_features
 
   langcode:
     plugin: default_value
@@ -37,3 +40,5 @@ process:
 destination:
   plugin: entity:media
   move: true
+
+migration_dependencies: {  }

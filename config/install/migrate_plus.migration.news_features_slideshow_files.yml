@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies: {}
+id: news_features_slideshow_files
+migration_tags: csv
+label: 'Migrating News Feature slideshow files from CSV file'
+
+source:
+  plugin: csv
+  path: 'public://migrations/news_feature_slideshow_files.csv'
+  delimiter: ','
+  enclosure: '"'
+  header_row_count: 1
+  keys:
+    - fid
+  constants:
+    path: 'public://migration_images/'
+
+process:
+  uid:
+    plugin: default_value
+    default_value: 1
+  fid: fid
+  filename: title
+  build_path:
+    plugin: concat
+    source: 
+      - constants/path
+      - filename
+  uri:
+    source:
+      - '@build_path'
+      - uri
+    plugin: file_copy
+
+destination:
+  plugin: 'entity:file'
+  source_path_property: filepath
+  destination_path_property: uri
+  move: true
+
+migration_dependencies: {  }
