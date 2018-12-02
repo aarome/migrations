@@ -7,21 +7,27 @@ label: 'Migrating News Feature slideshow files from CSV file'
 
 source:
   plugin: csv
-  path: 'public://migrations/news_feature_slideshow_files.csv'
+  path: 'public://migrations/news_slideshow_files_0.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
   keys:
     - fid
   constants:
-    path: 'public://migration_images/'
+    path: '/var/www/drupal/web/sites/default/files/migration_images/news_features_slideshows/'
 
 process:
   uid:
     plugin: default_value
     default_value: 1
   fid: fid
-  filename: title
+  filename: 
+    plugin: concat
+    source:
+        - publication_date
+        - publication
+        - filename
+    delimiter: '-'
   build_path:
     plugin: concat
     source: 

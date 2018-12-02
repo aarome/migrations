@@ -23,7 +23,7 @@ process:
     plugin: concat
     source:
         - publication_date
-        - filename
+        - title
     delimiter: '-'
   
   uri:
