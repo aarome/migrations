@@ -21,23 +21,17 @@ process:
     plugin: default_value
     default_value: 1
   fid: fid
-  filename: 
-    plugin: concat
-    source:
-        - publication_date
-        - publication
-        - filename
-    delimiter: '-'
-  build_path:
-    plugin: concat
-    source: 
-      - constants/path
-      - filename
+  filename: filename
+  # build_path:
+  #   plugin: concat
+  #   source: 
+  #     - constants/path
+  #     - filename
   uri:
-    source:
-      - '@build_path'
-      - uri
     plugin: file_copy
+    source:
+      - filepath
+      - uri
 
 destination:
   plugin: 'entity:file'

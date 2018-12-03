@@ -11,7 +11,8 @@ label: 'Migrating news features from CSV file'
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/news_features_join.csv'
+  #path: 'public://migrations/news_features_join.csv'
+  path: 'public://migrations/news_slideshow_nodes.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
@@ -34,18 +35,21 @@ process:
       default_value: 19
   created: post_date
   changed: updated_date
-  field_events_legacy_id: nid
   title: title
-  'body/format':
-    plugin: default_value
-    default_value: basic_html
-  'body/value': body
-  field_news_features_summary: summary
+  # 'body/format':
+  #   plugin: default_value
+  #   default_value: basic_html
+  # 'body/value': body
+  # field_news_features_summary: summary
   field_news_features_date/value:
     plugin: format_date
     source: post_date
     from_format: 'Y-m-d'
     to_format: 'Y-m-d'
+  # field_news_features_images/target_id:
+  #   source: fid
+  #   plugin: explode
+  #   delimiter: ';'
 
 destination: 
   plugin: entity:node
