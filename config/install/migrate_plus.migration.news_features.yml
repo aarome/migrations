@@ -46,11 +46,16 @@ process:
     source: post_date
     from_format: 'Y-m-d'
     to_format: 'Y-m-d'
-  # field_news_features_images/target_id:
-  #   source: fid
-  #   plugin: explode
-  #   delimiter: ';'
-
+  field_news_features_images/target_id:
+    - 
+      plugin: explode
+      source: fid
+      delimiter: ';'
+    -
+      plugin: static_map
+      source: fid
+      map:
+        from: 
 destination: 
   plugin: entity:node
   urlencode: true
