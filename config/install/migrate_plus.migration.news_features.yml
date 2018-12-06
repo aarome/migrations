@@ -2,8 +2,6 @@ langcode: en
 status: true
 dependencies: {}
 id: news_features
-class: null
-field_plugin_method: null
 migration_tags: csv
 migration_group: academy
 label: 'Migrating news features from CSV file'
@@ -46,16 +44,10 @@ process:
     source: post_date
     from_format: 'Y-m-d'
     to_format: 'Y-m-d'
-  field_news_features_images/target_id:
-    - 
-      plugin: explode
-      source: fid
-      delimiter: ';'
-    -
-      plugin: static_map
-      source: fid
-      map:
-        from: 
+  # field_news_features_images/target_id:
+  #   plugin: explode
+  #   source: fid
+  #   delimiter: ;
 destination: 
   plugin: entity:node
   urlencode: true
