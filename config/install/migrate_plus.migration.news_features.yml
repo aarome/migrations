@@ -39,15 +39,19 @@ process:
   #   default_value: basic_html
   # 'body/value': body
   # field_news_features_summary: summary
-  field_news_features_date/value:
-    plugin: format_date
-    source: post_date
-    from_format: 'Y-m-d'
-    to_format: 'Y-m-d'
-  # field_news_features_images/target_id:
-  #   plugin: explode
-  #   source: fid
-  #   delimiter: ;
+  # field_news_features_date/value:
+  #   plugin: format_date
+  #   source: post_date
+  #   from_format: 'Y-m-d'
+  #   to_format: 'Y-m-d'
+  field_news_features_images/target_id:
+    -
+      plugin: entity_lookup
+    -
+      source: fid
+      plugin: explode
+      delimiter: ;
+
 destination: 
   plugin: entity:node
   urlencode: true
