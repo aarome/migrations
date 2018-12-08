@@ -1,14 +1,14 @@
 langcode: en
 status: true
 dependencies: {}
-id: news_features_slideshow_media
+id: sof_media
 migration_tags: csv
-label: 'Migrating News Feature slideshow files from CSV file'
+label: 'Migrating SOF from CSV file'
 
 source:
   plugin: csv
   track_changes: true
-  path: 'public://migrations/news_slideshow_files_0.csv'
+  path: 'public://migrations/sof_files.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
@@ -18,16 +18,18 @@ source:
 process: 
   bundle:
     plugin: default_value
-    default_value: news_features
+    default_value: society_of_fellows
 
   langcode:
     plugin: default_value
     source: language
-    default_value: 'und'
+    default_value: 'en'
 
   uid:
     plugin: default_value
     default_value: 1
+
+  # Image field: see media_entity.bundle.image.yml
   name: title
   mid: fid
   field_media_image/target_id: fid
@@ -38,7 +40,7 @@ process:
     - 
       plugin: default_value
       default_value: summary_html 
-  field_media_subcaption/value: subcaption    
+  field_media_subcaption/value: sub_caption    
   field_media_subcaption/format: 
     - 
       plugin: default_value

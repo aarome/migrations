@@ -1,16 +1,15 @@
 langcode: en
 status: true
 dependencies: {}
-id: news_features
+id: sof
 migration_tags: csv
 migration_group: academy
-label: 'Migrating news features from CSV file'
+label: 'Migrating SOF from CSV file'
 
 source:
   plugin: csv
   track_changes: true
-  #path: 'public://migrations/news_features_join.csv'
-  path: 'public://migrations/news_slideshow_nodes.csv'
+  path: 'public://migrations/sof_nodes.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
@@ -20,32 +19,31 @@ source:
 process:
   type:
     plugin: default_value
-    default_value: news_features
+    default_value: society_of_fellows
   uid:
-    -
-      plugin: entity_lookup
-      source: author
-      ignore_case: true
-      value_key: name
-      entity_type: user
     -      
       plugin: default_value
       default_value: 19
-  # created: post_date
+  created: post_date
   changed: updated_date
-  title: title
+  # title: title
   # 'body/format':
   #   plugin: default_value
   #   default_value: basic_html
   # 'body/value': body
   # field_news_features_summary: summary
-  # field_news_features_date/value:
-  #   plugin: format_date
-  #   source: post_date
-  #   from_format: 'Y-m-d'
-  #   to_format: 'Y-m-d'
-
-  # field_news_features_images: 
+  # field_sof_type:
+  #   -
+  #     plugin: explode
+  #     source: type
+  #     delimiter: ;
+  #   -
+  #     plugin: entity_lookup
+  #     value_key: name
+  #     bundle_key: vid
+  #     bundle: society_of_fellows_types
+  #     entity_type: taxonomy_term
+  # field_sof_images: 
   #   -
   #     plugin: explode
   #     source: fid
@@ -57,9 +55,7 @@ process:
   #     # type of entity
   #     entity_type: media
   #     # bundle machine name
-  #     bundle: news_features
-  #   # -
-  #   #   plugin: skip_on_empty
+  #     bundle: society_of_fellows
 
 destination: 
   plugin: entity:node
