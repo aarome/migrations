@@ -1,13 +1,13 @@
 langcode: en
 status: true
 dependencies: {}
-id: news_features_slideshow_files
+id: sof_files
 migration_tags: csv
-label: 'Migrating News Feature slideshow files from CSV file'
+label: 'Migrating SOF files from CSV file'
 
 source:
   plugin: csv
-  path: 'public://migrations/news_slideshow_files_0.csv'
+  path: 'public://migrations/sof_files.csv'
   delimiter: ','
   enclosure: '"'
   header_row_count: 1
@@ -25,10 +25,6 @@ process:
     source:
       - filepath
       - uri
-  langcode:
-    plugin: default_value
-    source: language
-    default_value: 'und'
 
 destination:
   plugin: 'entity:file'
