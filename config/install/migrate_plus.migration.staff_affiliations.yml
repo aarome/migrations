@@ -19,13 +19,14 @@ source:
 
 process:
   field_affil_type:
-    source: type
-    plugin: entity_lookup
-    entity_type: taxonomy_term
-    bundle_key: vid
-    bundle: affiliation_types
-    value_key: name
-    ignore_case: true
+    - plugin: default_value
+      default_value: Staff
+    - plugin: entity_lookup
+      ignore_case: true
+      value_key: name
+      entity_type: taxonomy_term
+      bundle_key: vid
+      bundle: affiliation_types
 
   field_role:
     source: role
@@ -36,14 +37,14 @@ process:
     value_key: name
     ignore_case: true
 
-  # field_office:
-  #   source: role
-  #   plugin: entity_lookup
-  #   entity_type: taxonomy_term
-  #   bundle_key: vid
-  #   bundle: roles
-  #   value_key: name
-  #   ignore_case: true
+  field_department:
+    source: department
+    plugin: entity_lookup
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: departments
+    value_key: name
+    ignore_case: true
 
   uid:
     - plugin: default_value

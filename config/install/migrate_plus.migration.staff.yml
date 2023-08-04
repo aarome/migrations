@@ -21,23 +21,27 @@ process:
   field_people_name/middle: mname
   field_people_name/family: lname
   field_email: email
-  #   field_people_affiliations/target_id:
-  #     - plugin: migration
-  #       migration: affiliations
-  #       no_stub: true
-  #       source: id
-  #     - plugin: extract
-  #       index:
-  #         - "0"
+  field_people_affiliations/target_id:
+    - plugin: migration_lookup
+      migration: staff_affiliations
+      no_stub: true
+      source: id
+    - plugin: extract
+      index:
+        - "0"
 
-  #   field_people_affiliations/target_revision_id:
-  #     - plugin: migration
-  #       migration: affiliations
-  #       no_stub: true
-  #       source: id
-  #     - plugin: extract
-  #       index:
-  #         - "1"
+  field_people_affiliations/target_revision_id:
+    - plugin: migration_lookup
+      migration: staff_affiliations
+      no_stub: true
+      source: id
+    - plugin: extract
+      index:
+        - "1"
+
+  status:
+    - plugin: default_value
+      default_value: 0
 
   uid:
     - plugin: default_value
