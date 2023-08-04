@@ -11,7 +11,7 @@ label: "Migrating staff affiliations from CSV file"
 source:
   track_changes: true
   plugin: csv
-  path: "public://migrations/staff.csv"
+  path: "public://migrations/staff/staff.csv"
   delimiter: ","
   enclosure: '"'
   header_row_count: 1

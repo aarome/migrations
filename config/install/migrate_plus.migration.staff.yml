@@ -7,7 +7,7 @@ label: "Migrating staff from CSV file"
 
 source:
   plugin: csv
-  path: "public://migrations/staff.csv"
+  path: "public://migrations/staff/staff.csv"
   delimiter: ","
   enclosure: '"'
   header_row_count: 1

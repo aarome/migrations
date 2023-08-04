@@ -11,7 +11,7 @@ label: "Migrating roles from CSV file"
 source:
   track_changes: true
   plugin: csv
-  path: "public://migrations/roles.csv"
+  path: "public://migrations/staff/roles.csv"
   delimiter: ","
   enclosure: '"'
   header_row_count: 1

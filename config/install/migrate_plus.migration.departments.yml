@@ -11,7 +11,7 @@ label: "Migrating departments from CSV file"
 source:
   track_changes: true
   plugin: csv
-  path: "public://migrations/departments.csv"
+  path: "public://migrations/staff/departments.csv"
   delimiter: ","
   enclosure: '"'
   header_row_count: 1
