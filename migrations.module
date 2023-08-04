@@ -5,21 +5,47 @@
  * Contains migrations.module.
  */
 
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function migrations_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.migrations':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Migrations!') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function migrations_migrate() {
+  return [
+    'migrations' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
 /**
  * Implements hook_uninstall().
  *
  * Removes stale migration configs during uninstall.
  */
 function migrations_uninstall() {
-  $query = db_select('config', 'c')
-    ->fields('c', array('name'))
-    ->condition('name', db_like('migrate_plus.') . '%', 'LIKE')
-    ->execute();
-
-  $config_names = $query->fetchAll();
-
-  // Delete each config using configFactory.
-  foreach ($config_names as $config_name) {
-    \Drupal::configFactory()->getEditable($config_name->name)->delete();
+  $migrations = [
+    'roles',
+    'departments',
+    'staff_affiliations',
+    'staff',
+  ];
+  foreach ($migrations as $migration) {
+    Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
   }
 }
