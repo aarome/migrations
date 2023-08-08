@@ -20,7 +20,13 @@ process:
   field_people_name/given: fname
   field_people_name/middle: mname
   field_people_name/family: lname
-  field_email: email
+  field_email/value: email
+  field_telephone/value: telephone
+  field_people_biographical_note/value: bio
+  field_people_biographical_note/format:
+    plugin: default_value
+    default_value: "basic_html"
+
   field_people_affiliations/target_id:
     - plugin: migration_lookup
       migration: staff_affiliations
@@ -41,7 +47,7 @@ process:
 
   status:
     - plugin: default_value
-      default_value: 0
+      default_value: 1
 
   uid:
     - plugin: default_value

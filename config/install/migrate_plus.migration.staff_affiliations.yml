@@ -46,6 +46,8 @@ process:
     value_key: name
     ignore_case: true
 
+  field_office/value: office
+
   uid:
     - plugin: default_value
       default_value: 19
