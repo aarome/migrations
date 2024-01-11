@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies: {}
+id: afaar_paragraph
+class: null
+field_plugin_method: null
+migration_tags: csv
+migration_group: afaar
+label: "Migrating AFAAR from CSV file"
+
+source:
+  track_changes: true
+  plugin: csv
+  path: "public://migrations/people/afaar.csv"
+  delimiter: "|"
+  enclosure: '"'
+  header_row_count: 1
+  ids: [id]
+
+process:
+  field_affil_type:
+    plugin: default_value
+    default_value: 391
+
+  field_affil_discipline:
+    plugin: entity_lookup
+    source: discipline
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: disciplines
+    value_key: name
+    ignore_case: true
+
+  field_affil_aff_fellowship_name:
+    plugin: entity_lookup
+    source: terms_afaar_name
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: affiliated_fellowship_names
+    value_key: name
+    ignore_case: true
+
+  field_affil_dates/value:
+    - plugin: format_date
+      source: date_start
+      from_format: 'Y-m-d'
+      to_format: 'Y-m-d'
+
+  field_affil_dates/end_value:
+    - plugin: format_date
+      source: date_end
+      from_format: 'Y-m-d'
+      to_format: 'Y-m-d'
+
+  uid:
+    - plugin: default_value
+      default_value: 19
+
+destination:
+  plugin: "entity_reference_revisions:paragraph"
+  default_bundle: affiliation

@@ -1,0 +1,60 @@
+langcode: en
+status: true
+id: afaar_node
+migration_tags: csv
+migration_group: afaar
+label: "Migrating staff from CSV file"
+
+source:
+  plugin: csv
+  path: "public://migrations/people/afaar.csv"
+  delimiter: "|"
+  enclosure: '"'
+  header_row_count: 1
+  ids: [id]
+
+process:
+  type:
+    plugin: default_value
+    default_value: people
+  field_people_name/given: fname
+  field_people_name/middle: mname
+  field_people_name/family: lname
+  field_email/value: email
+  field_telephone/value: telephone
+  field_people_biographical_note/value: bio
+  field_people_biographical_note/format:
+    plugin: default_value
+    default_value: "basic_html"
+
+  field_people_affiliations/target_id:
+    - plugin: migration_lookup
+      migration: afaar_paragraph
+      no_stub: true
+      source: id
+    - plugin: extract
+      index:
+        - "0"
+
+  field_people_affiliations/target_revision_id:
+    - plugin: migration_lookup
+      migration: afaar_paragraph
+      no_stub: true
+      source: id
+    - plugin: extract
+      index:
+        - "1"
+
+  status:
+    - plugin: default_value
+      default_value: 0
+
+  uid:
+    - plugin: default_value
+      default_value: 19
+
+destination:
+  plugin: entity:node
+migration_dependencies:
+  optional:
+    - afaar_paragraph

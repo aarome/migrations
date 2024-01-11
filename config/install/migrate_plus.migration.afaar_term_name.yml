@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies: {}
+id: afaar_term_name
+class: null
+field_plugin_method: null
+migration_tags: csv
+migration_group: afaar
+label: "Migrating AFAAR fellowship terms from CSV file"
+
+source:
+  track_changes: true
+  plugin: csv
+  path: "public://migrations/people/afaar.csv"
+  delimiter: "|"
+  enclosure: '"'
+  header_row_count: 1
+  ids: [id]
+
+process:
+  name: terms_afaar_name
+  uid:
+    - plugin: default_value
+      default_value: 19
+
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: affiliated_fellowship_names
+
+migration_dependencies: null
