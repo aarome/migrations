@@ -8,7 +8,7 @@ label: "Migrating staff from CSV file"
 source:
   plugin: csv
   path: "public://migrations/people/afaar.csv"
-  delimiter: "|"
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
   ids: [id]
@@ -22,6 +22,10 @@ process:
   field_people_name/family: lname
   field_email/value: email
   field_telephone/value: telephone
+  field_people_professions/value: profession
+  field_people_professions/format:
+    plugin: default_value
+    default_value: "plain_text"
   field_people_biographical_note/value: bio
   field_people_biographical_note/format:
     plugin: default_value

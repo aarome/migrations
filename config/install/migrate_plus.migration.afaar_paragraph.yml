@@ -6,13 +6,13 @@ class: null
 field_plugin_method: null
 migration_tags: csv
 migration_group: afaar
-label: "Migrating AFAAR from CSV file"
+label: "Migrating AFAAR affiliation paragraphs from CSV file"
 
 source:
   track_changes: true
   plugin: csv
   path: "public://migrations/people/afaar.csv"
-  delimiter: "|"
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
   ids: [id]
@@ -33,12 +33,16 @@ process:
 
   field_affil_aff_fellowship_name:
     plugin: entity_lookup
-    source: terms_afaar_name
+    source: fellowship_name
     entity_type: taxonomy_term
     bundle_key: vid
-    bundle: affiliated_fellowship_names
+    bundle: afaar_names
     value_key: name
     ignore_case: true
+
+  field_affil_year:
+    plugin: default_value
+    default_value: 1133
 
   field_affil_dates/value:
     - plugin: format_date
