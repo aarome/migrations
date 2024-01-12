@@ -11,20 +11,20 @@ label: "Migrating AFAAR fellowship terms from CSV file"
 source:
   track_changes: true
   plugin: csv
-  path: "public://migrations/people/afaar.csv"
-  delimiter: "|"
+  path: "public://migrations/terms/afaar-terms.csv"
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
   ids: [id]
 
 process:
-  name: terms_afaar_name
+  name: fellowship_name
   uid:
     - plugin: default_value
       default_value: 19
 
 destination:
   plugin: entity:taxonomy_term
-  default_bundle: affiliated_fellowship_names
+  default_bundle: afaar_names
 
 migration_dependencies: null

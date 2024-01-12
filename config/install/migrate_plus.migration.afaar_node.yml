@@ -26,6 +26,10 @@ process:
   field_people_biographical_note/format:
     plugin: default_value
     default_value: "basic_html"
+  field_people_website/uri: link
+  field_people_website/title:
+    plugin: default_value
+    default_value: 'Read more'
 
   field_people_affiliations/target_id:
     - plugin: migration_lookup
