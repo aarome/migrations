@@ -41,8 +41,13 @@ process:
     ignore_case: true
 
   field_affil_year:
-    plugin: default_value
-    default_value: 1133
+    plugin: entity_lookup
+    source: affiliation_year
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: affiliation_years
+    value_key: name
+    ignore_case: true
 
   field_affil_dates/value:
     - plugin: format_date
