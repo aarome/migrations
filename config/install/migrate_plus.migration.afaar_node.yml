@@ -53,6 +53,15 @@ process:
       index:
         - "1"
 
+  field_people_portrait/target_id:
+    -
+      plugin: entity_lookup
+      entity_type: media
+      bundle: image
+    -
+      plugin: default_value
+      default_value: 24712
+
   status:
     - plugin: default_value
       default_value: 0
