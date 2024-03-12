@@ -12,11 +12,10 @@ source:
   plugin: csv
   track_changes: true
   path: 'public://migrations/people_fellows.csv'
-  delimiter: ','
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
-  keys:
-    - id
+  ids: [id]
 
 process:
   field_affil_type:
@@ -27,7 +26,7 @@ process:
     bundle: affiliation_types
     value_key: name
     ignore_case: true
-  
+
   field_affil_discipline:
     source: discipline
     plugin: entity_lookup
@@ -35,8 +34,8 @@ process:
     bundle_key: vid
     bundle: disciplines
     value_key: name
-    ignore_case: true 
-  
+    ignore_case: true
+
   field_affil_fellowship_name:
     source: rp_name
     plugin: entity_lookup
@@ -44,14 +43,14 @@ process:
     bundle_key: vid
     bundle: fellowship_names
     value_key: name
-    ignore_case: true 
-  
+    ignore_case: true
+
   field_affil_dates/value:
     source: year_start
     plugin: format_date
     from_format: 'Y-m-d'
     to_format: 'Y-m-d'
-  
+
   field_affil_dates/end_value:
     source: year_end
     plugin: format_date

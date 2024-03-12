@@ -9,11 +9,10 @@ source:
   plugin: csv
   track_changes: true
   path: 'public://migrations/directory_test.csv'
-  delimiter: ','
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
-  keys:
-    - nid
+  ids: [id]
 
 process:
   type:
@@ -24,7 +23,6 @@ process:
     default_value: 193
   field_people_legacy_id: nid
   field_people_name/given: fname
-  field_people_name/family: lname
   field_people_name/family: lname
   field_people_affiliations:
     -
@@ -40,7 +38,7 @@ process:
       process:
         target_id: '0'
         target_revision_id: '1'
-destination: 
+destination:
   plugin: entity:node
 
 migration_dependencies: {}

@@ -39,13 +39,16 @@ function migrations_migrate() {
  * Removes stale migration configs during uninstall.
  */
 function migrations_uninstall() {
-  $migrations = [
-    'roles',
-    'departments',
-    'staff_affiliations',
-    'staff',
-  ];
-  foreach ($migrations as $migration) {
-    Drupal::configFactory()->getEditable('migrate_plus.migration.' . $migration)->delete();
+  $database = \Drupal::database();
+  $query = $database->select('config', 'c')
+    ->fields('c', ['name'])
+    ->condition('name', $database->escapeLike('migrate_plus.') . '%', 'LIKE')
+    ->execute();
+
+  $config_names = $query->fetchAll();
+
+  // Delete each config using configFactory.
+  foreach ($config_names as $config_name) {
+    \Drupal::configFactory()->getEditable($config_name->name)->delete();
   }
 }

@@ -11,16 +11,15 @@ label: 'Migrating fellowships from CSV file'
 source:
   plugin: csv
   path: 'public://migrations/fellowships.csv'
-  delimiter: ','
+  delimiter: ","
   enclosure: '"'
   header_row_count: 1
-  keys:
-    - tid
+  ids: [id]
 
 process:
   name: term_name
- 
-destination: 
+
+destination:
   plugin: entity:taxonomy_term
   default_bundle: fellowship_names
 

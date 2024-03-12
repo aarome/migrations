@@ -8,13 +8,14 @@ label: 'Migrating News Feature slideshow media from CSV file'
 source:
   plugin: csv
   path: 'public://migrations/news_feature_slideshow_files.csv'
+  delimiter: ","
+  enclosure: '"'
   header_row_count: 1
-  keys:
-    - fid
+  ids: [id]
 
 process:
   mid: fid
-  
+
   bundle:
     plugin: default_value
     default_value: people

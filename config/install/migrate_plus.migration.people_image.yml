@@ -1,7 +1,7 @@
 langcode: en
 status: true
 dependencies: {  }
-id: people_images
+id: people_image
 migration_tags: null
 label: 'People images'
 
@@ -9,18 +9,19 @@ source:
   plugin: csv
   track_changes: true
   path: 'public://migrations/people_fellows.csv'
+  delimiter: ","
+  enclosure: '"'
   header_row_count: 1
-  keys:
-    - fid
+  ids: [id]
 
 process:
   uid:
     plugin: default_value
     default_value: 1
-  
+
   fid: fid
   filename: filename
-  
+
   uri:
     # copy file from filepath to uri
     plugin: file_copy

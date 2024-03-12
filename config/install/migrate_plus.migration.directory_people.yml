@@ -1,0 +1,75 @@
+langcode: en
+status: true
+id: directory_people
+migration_tags:
+  - json
+migration_group: directory
+label: 'Migration from JSON to Drupal node entities with paragraph references'
+
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  urls: 'public://migrations/directory/directory_people.json'
+  item_selector: /
+  fields:
+    - name: id
+      selector: id
+    - name: title
+      selector: title
+    - name: fname
+      selector: fname
+    - name: mname
+      selector: mname
+    - name: lname
+      selector: lname
+    - name: affiliations
+      selector: affiliations
+  ids:
+    id:
+      type: integer
+
+process:
+  type:
+    plugin: default_value
+    default_value: people
+
+  # title: title
+  title:
+    -
+      plugin: skip_existing_node
+      source: title
+
+  field_people_name/given: fname
+  field_people_name/family: lname
+
+  # Assuming 'field_people_affiliations' is an entity reference field to paragraphs
+  field_people_affiliations:
+    - plugin: sub_process
+      source: affiliations
+      process:
+        ids:
+          - plugin: migration_lookup
+            migration:
+              - directory_affiliations
+            source_ids:
+              directory_affiliations:
+                - pg
+        target_id:
+          plugin: extract
+          source: "@ids"
+          index:
+            - 0
+        target_revision_id:
+          plugin: extract
+          source: "@ids"
+          index:
+            - 1
+
+destination:
+  plugin: entity:node
+  default_bundle: 'people'
+
+migration_dependencies:
+  required:
+    - directory_affiliations # Ensure this matches the actual ID of your paragraph migration
