@@ -1,0 +1,30 @@
+# Migration metadata
+id: directory_prizes
+label: directory_prizes
+description: Migration from CSV to Drupal taxonomy vocabularies
+migration_tags: csv
+migration_group: csv
+
+source:
+  track_changes: true
+  plugin: csv
+  path: 'public://migrations/directory/sources/aarome-prizes-awards-pulitzer.csv'
+  delimiter: ','
+  enclosure: '"'
+  ids: [id]
+
+# Process plugin
+process:
+  type:
+    plugin: default_value
+    default_value: person
+  uid:
+    plugin: default_value
+    default_value: 19
+  title: title
+# Destination plugin
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: prizes_awards
+
+migration_dependencies: {}

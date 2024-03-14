@@ -10,7 +10,8 @@ source:
   plugin: url
   data_fetcher_plugin: file
   data_parser_plugin: json
-  urls: 'public://migrations/directory/directory_people.json'
+  urls: 'public://migrations/directory/scripts/output/240313-processed-aarome-alumni-mm-00.json'
+  # urls: 'public://migrations/directory/directory_people.json'
   item_selector: /
   fields:
     - name: id
@@ -19,8 +20,6 @@ source:
       selector: title
     - name: fname
       selector: fname
-    - name: mname
-      selector: mname
     - name: lname
       selector: lname
     - name: affiliations
@@ -34,6 +33,10 @@ process:
     plugin: default_value
     default_value: people
 
+  uid:
+    plugin: default_value
+    default_value: 19
+
   # title: title
   title:
     -
@@ -41,6 +44,7 @@ process:
       source: title
 
   field_people_name/given: fname
+  field_people_name/middle: mname
   field_people_name/family: lname
 
   # Assuming 'field_people_affiliations' is an entity reference field to paragraphs
@@ -54,7 +58,7 @@ process:
               - directory_affiliations
             source_ids:
               directory_affiliations:
-                - pg
+                - pg_id
         target_id:
           plugin: extract
           source: "@ids"
@@ -71,5 +75,5 @@ destination:
   default_bundle: 'people'
 
 migration_dependencies:
-  required:
+  optional:
     - directory_affiliations # Ensure this matches the actual ID of your paragraph migration

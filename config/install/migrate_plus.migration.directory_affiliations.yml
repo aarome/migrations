@@ -6,15 +6,19 @@ source:
   plugin: url
   data_fetcher_plugin: file
   data_parser_plugin: json
-  urls: 'public://migrations/directory/directory_affiliations.json'
+  track_changes: true
+  constants:
+    SUFFIX_DATE: "-01-01"
+  urls: 'public://migrations/directory/scripts/output/240313-processed-aarome-alumni-mm-affiliations.json'
+  # urls: 'public://migrations/directory/directory_affiliations.json'
   item_selector: /
   fields:
     -
       name: parent_id
       selector: parent_id
     -
-      name: pg
-      selector: pg
+      name: pg_id
+      selector: pg_id
     -
       name: affiliation_type
       selector: affiliation_type
@@ -24,16 +28,16 @@ source:
     -
       name: year_start
       selector: year_start
+    -
+      name: year_end
+      selector: year_end
   ids:
-    pg:
+    pg_id:
       type: integer
 
 process:
-  field_pg:
-    plugin: get
-    source: pg
   field_affil_type:
-    plugin: entity_lookup
+    plugin: entity_generate
     source: affiliation_type
     entity_type: taxonomy_term
     bundle_key: vid
@@ -41,13 +45,22 @@ process:
     value_key: name
     ignore_case: true
   field_affil_discipline:
-    plugin: entity_lookup
+    plugin: entity_generate
     source: discipline
     entity_type: taxonomy_term
     bundle_key: vid
     bundle: disciplines
     value_key: name
     ignore_case: true
+
+  build_date:
+    plugin: concat
+    source:
+      - year_start
+      - constants/SUFFIX_DATE
+
+  field_affil_dates/value: "@build_date"
+  field_affil_dates/end_value: "@build_date"
 
 destination:
   plugin: 'entity_reference_revisions:paragraph'
