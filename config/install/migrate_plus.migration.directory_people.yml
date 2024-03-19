@@ -46,6 +46,9 @@ process:
   field_people_name/given: fname
   field_people_name/middle: mname
   field_people_name/family: lname
+  field_people_source/value:
+    plugin: default_value
+    default_value: 1
 
   # Assuming 'field_people_affiliations' is an entity reference field to paragraphs
   field_people_affiliations:
