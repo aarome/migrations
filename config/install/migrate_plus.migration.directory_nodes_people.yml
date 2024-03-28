@@ -48,7 +48,7 @@ process:
   field_people_name/given: fname
   field_people_name/middle: mname
   field_people_name/family: lname
-  field_people_source/value:
+  field_source/value:
     plugin: default_value
     default_value: 1
 
