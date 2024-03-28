@@ -1,0 +1,33 @@
+# Migration metadata
+id: directory_nodes_awards
+label: 'Migration from csv to nodes'
+description: Migration from CSV to Drupal nodes
+migration_tags: csv
+migration_group: directory_nodes
+
+source:
+  track_changes: true
+  plugin: csv
+  path: 'public://migrations/directory/scripts/sources/aarome-nodes-awards.csv'
+  delimiter: ','
+  enclosure: '"'
+  ids: [id]
+
+process:
+  type:
+    plugin: default_value
+    default_value: directory_awards
+  uid:
+    plugin: default_value
+    default_value: 19
+  title: name
+
+  field_source/value:
+    plugin: default_value
+    default_value: 'migration'
+
+destination:
+  plugin: entity:node
+  default_bundle: 'directory_awards'
+
+migration_dependencies: null

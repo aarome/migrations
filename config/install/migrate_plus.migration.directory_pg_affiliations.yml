@@ -1,6 +1,6 @@
-id: directory_affiliations
+id: directory_pg_affiliations
 label: 'Migrating directory affiliations from JSON file'
-migration_group: directory
+migration_group: directory_paragraphs
 
 source:
   plugin: url
@@ -10,7 +10,6 @@ source:
   constants:
     SUFFIX_DATE: "-01-01"
   urls: 'public://migrations/directory/scripts/output/240313-processed-aarome-alumni-mm-affiliations.json'
-  # urls: 'public://migrations/directory/directory_affiliations.json'
   item_selector: /
   fields:
     -

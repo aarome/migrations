@@ -1,16 +1,16 @@
 langcode: en
 status: true
-id: directory_people
+id: directory_nodes_people
 migration_tags:
   - json
-migration_group: directory
+migration_group: directory_nodes
 label: 'Migration from JSON to Drupal node entities with paragraph references'
 
 source:
   plugin: url
   data_fetcher_plugin: file
   data_parser_plugin: json
-  urls: 'public://migrations/directory/scripts/output/240313-processed-aarome-alumni-mm-00.json'
+  urls: 'public://migrations/directory/scripts/output/240328-processed-aarome-alumni-mm-people.json'
   # urls: 'public://migrations/directory/directory_people.json'
   item_selector: /
   fields:
@@ -24,6 +24,8 @@ source:
       selector: lname
     - name: affiliations
       selector: affiliations
+    - name: entries
+      selector: entries
   ids:
     id:
       type: integer
@@ -58,9 +60,31 @@ process:
         ids:
           - plugin: migration_lookup
             migration:
-              - directory_affiliations
+              - directory_pg_affiliations
             source_ids:
-              directory_affiliations:
+              directory_pg_affiliations:
+                - pg_id
+        target_id:
+          plugin: extract
+          source: "@ids"
+          index:
+            - 0
+        target_revision_id:
+          plugin: extract
+          source: "@ids"
+          index:
+            - 1
+
+  field_directory_entry:
+    - plugin: sub_process
+      source: entries
+      process:
+        ids:
+          - plugin: migration_lookup
+            migration:
+              - directory_pg_entries
+            source_ids:
+              directory_pg_entries:
                 - pg_id
         target_id:
           plugin: extract
@@ -79,4 +103,5 @@ destination:
 
 migration_dependencies:
   optional:
-    - directory_affiliations # Ensure this matches the actual ID of your paragraph migration
+    - directory_pg_affiliations
+    - directory_pg_entries

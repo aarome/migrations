@@ -1,0 +1,91 @@
+id: directory_pg_entries
+label: 'Migrating directory entries from JSON file'
+migration_group: directory_paragraphs
+
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: json
+  track_changes: true
+  constants:
+    SUFFIX_DATE: "-01-01"
+  urls: 'public://migrations/directory/scripts/output/240328-processed-aarome-alumni-mm-entries.json'
+  item_selector: /
+  fields:
+    -
+      name: parent_id
+      selector: parent_id
+    -
+      name: pg_id
+      selector: pg_id
+    -
+      name: award
+      selector: award
+    -
+      name: type
+      selector: type
+    -
+      name: year_start
+      selector: year_start
+    -
+      name: year_end
+      selector: year_end
+    -
+      name: date_range_type
+      selector: date_range_type
+    -
+      name: subcategory
+      selector: subcategory
+  ids:
+    pg_id:
+      type: integer
+
+process:
+  build_date:
+    plugin: concat
+    source:
+      - year_start
+      - constants/SUFFIX_DATE
+
+  field_directory_date_range/value: "@build_date"
+  field_directory_date_range/end_value: "@build_date"
+  field_directory_date_type:
+    - plugin: entity_lookup
+      source: date_range_type
+      value_key: name
+      bundle_key: vid
+      entity_type: taxonomy_term
+      bundle: directory_date_range_type
+      ignore_case: true
+      no_stub: true
+      access_check: false
+  field_directory_subcategory:
+    - plugin: entity_lookup
+      source: subcategory
+      value_key: name
+      bundle_key: vid
+      entity_type: taxonomy_term
+      bundle: directory_subcategories
+      ignore_case: true
+      no_stub: true
+      access_check: false
+  field_directory_record:
+    - plugin: entity_lookup
+      source: award
+      value_key: title
+      bundle_key: type
+      entity_type: node
+      bundle: directory_awards
+      ignore_case: true
+      no_stub: true
+      access_check: false
+
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: 'directory_entry'
+
+migration_dependencies:
+  optional:
+    - directory_date_range_type
+    - directory_terms_subcategories
+    - directory_awards

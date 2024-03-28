@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies: {}
+id: directory_terms_roles
+migration_tags: csv
+migration_group: directory_terms
+label: 'Migrating roles from CSV file'
+
+source:
+  plugin: csv
+  path: 'public://migrations/directory/scripts/sources/aarome-terms-roles.csv'
+  delimiter: ","
+  enclosure: '"'
+  header_row_count: 1
+  ids: [id]
+
+process:
+  name: name
+
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: directory_roles
+
+migration_dependencies: null
